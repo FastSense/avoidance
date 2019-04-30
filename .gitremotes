@@ -1,0 +1,4 @@
+origin	git@github.com:FastSense/avoidance.git (fetch)
+origin	git@github.com:FastSense/avoidance.git (push)
+upstream	git@github.com:PX4/avoidance.git (fetch)
+upstream	git@github.com:PX4/avoidance.git (push)
