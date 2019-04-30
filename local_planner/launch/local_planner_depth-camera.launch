@@ -3,6 +3,8 @@
     <arg name="world_file_name"    default="simple_obstacle" />
     <arg name="world_path" default="$(find local_planner)/../sim/worlds/$(arg world_file_name).world" />
     <arg name="pointcloud_topics" default="[/camera/depth/points]"/>
+    <arg name="fs_config_mavros_yaml" default="$(find local_planner)/resource/px4_config.yaml"/>
+    <arg name="gazebo_gui" default="false"/>
 
     <!-- Define a static transform from a camera internal frame to the fcu for every camera used -->
     <node pkg="tf" type="static_transform_publisher" name="tf_depth_camera"
@@ -12,6 +14,8 @@
     <include file="$(find local_planner)/launch/local_planner_sitl_mavros.launch" >
         <arg name="model" value="iris_depth_camera" />
         <arg name="world_path" value="$(arg world_path)" />
+        <arg name="gui" value="$(arg gazebo_gui)"/>
+        <arg name="fs_config_mavros_yaml" value="$(arg fs_config_mavros_yaml)" />
     </include>
 
     <!-- Load custom console configuration -->
