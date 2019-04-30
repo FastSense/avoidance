@@ -36,6 +36,16 @@
       </axis>
     </joint>
 
+    <plugin name="ground_truth_pose" filename="libgazebo_ros_p3d.so">
+      <robotNamespace/>
+      <alwaysOn>true</alwaysOn>
+      <updateRate>100.0</updateRate>
+      <bodyName>iris::base_link</bodyName>
+      <topicName>base_link_ground_truth/state</topicName>
+      <gaussianNoise>0.0</gaussianNoise>
+      <frameName>map</frameName>
+    </plugin>
+
     <!-- <include>
       <uri>model://odometry_sensor</uri>
       <pose>-0.12 0.05 0 0 1.5708 1.5708</pose>
