@@ -1,4 +1,4 @@
-# Obstacle Detection and Avoidance
+# Obstacle Detection and Avoidance Fast Sense fork
 PX4 computer vision algorithms packaged as ROS nodes for depth sensor fusion and obstacle avoidance. This repository contains two different implementations:
 
   * *local_planner* is a local VFH+* based planner that plans (including some history) in a vector field histogram
