@@ -49,6 +49,9 @@ LocalPlannerNode::LocalPlannerNode(const ros::NodeHandle& nh,
   clicked_goal_sub_ =
       nh_.subscribe("/move_base_simple/goal", 1,
                     &LocalPlannerNode::clickedGoalCallback, this);
+  fs_goal_sub_ =
+      nh_.subscribe("/fast_sense/goal", 1,
+                    &LocalPlannerNode::fsGoalCallback, this);
   fcu_input_sub_ = nh_.subscribe("/mavros/trajectory/desired", 1,
                                  &LocalPlannerNode::fcuInputGoalCallback, this);
   goal_topic_sub_ = nh_.subscribe("/input/goal_position", 1,
@@ -437,6 +440,12 @@ void LocalPlannerNode::clickedGoalCallback(
   /* Selecting the goal from Rviz sets x and y. Get the z coordinate set in
    * the launch file */
   goal_msg_.pose.position.z = local_planner_->getGoal().z();
+}
+
+void LocalPlannerNode::fsGoalCallback(
+        const geometry_msgs::PoseStamped& msg) {
+  new_goal_ = true;
+  goal_msg_ = msg;
 }
 
 void LocalPlannerNode::updateGoalCallback(

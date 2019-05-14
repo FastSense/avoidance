@@ -241,6 +241,7 @@ class LocalPlannerNode {
   ros::Subscriber state_sub_;
   ros::Subscriber clicked_point_sub_;
   ros::Subscriber clicked_goal_sub_;
+  ros::Subscriber fs_goal_sub_;
   ros::Subscriber fcu_input_sub_;
   ros::Subscriber goal_topic_sub_;
   ros::Subscriber distance_sensor_sub_;
@@ -349,6 +350,11 @@ class LocalPlannerNode {
   * @param[in] msg, goal position
   **/
   void clickedGoalCallback(const geometry_msgs::PoseStamped& msg);
+/**
+ * * @brief     callaback for selecting the goal by fast sense (x, y, z)
+ * * @param[in] msg, goal position\
+ * **/
+  void fsGoalCallback(const geometry_msgs::PoseStamped& msg);
   /**
   * @brief     callaback
   * @param[in] msg,
