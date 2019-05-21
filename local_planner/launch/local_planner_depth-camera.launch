@@ -14,6 +14,7 @@
     <arg name="goal_x" default="0" />
     <arg name="goal_y" default="0"/>
     <arg name="goal_z" default="3" />
+    <arg name="disable_rise_to_goal_altitude" default="false" />
 
     <!-- Define a static transform from a camera internal frame to the fcu for every camera used -->
     <node pkg="tf" type="static_transform_publisher" name="tf_depth_camera"
@@ -40,6 +41,7 @@
         <param name="goal_x_param" value="$(arg goal_x)" />
         <param name="goal_y_param" value="$(arg goal_y)"/>
         <param name="goal_z_param" value="$(arg goal_z)" />
+        <param name="disable_rise_to_goal_altitude" value="$(arg disable_rise_to_goal_altitude)" />
         <param name="world_name" value="$(find local_planner)/../sim/worlds/$(arg world_file_name).yaml" />
         <rosparam param="pointcloud_topics" subst_value="True">$(arg pointcloud_topics)</rosparam>
     </node>
