@@ -242,7 +242,7 @@ void WaypointGenerator::adaptSpeed() {
     output_.adapted_goto_position = position_ + pose_to_wp;
   }
 
-  ROS_INFO("[WG] Speed adapted WP: [%f %f %f].",
+  ROS_DEBUG("[WG] Speed adapted WP: [%f %f %f].",
            output_.adapted_goto_position.x(), output_.adapted_goto_position.y(),
            output_.adapted_goto_position.z());
 }

@@ -221,7 +221,7 @@ void StarPlanner::buildLookAheadTree() {
   path_node_origins_.push_back(0);
   tree_age_ = 0;
 
-  ROS_INFO(
+  ROS_DEBUG(
       "\033[0;35m[SP]Tree (%.0f nodes, %.0f path nodes, %.0f expanded) "
       "calculated in %2.2fms.\033[0m",
       (double)tree_.size(), (double)path_node_positions_.size(),

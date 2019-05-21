@@ -74,7 +74,7 @@ void LocalPlanner::applyGoal() {
 }
 
 void LocalPlanner::runPlanner() {
-  ROS_INFO("\033[1;35m[OA] Planning started, using %i cameras\n \033[0m",
+  ROS_DEBUG("\033[1;35m[OA] Planning started, using %i cameras\n \033[0m",
            static_cast<int>(original_cloud_vector_.size()));
 
   // calculate Field of View
@@ -127,7 +127,11 @@ void LocalPlanner::generateHistogramImage(Histogram& histogram) {
 }
 
 void LocalPlanner::determineStrategy() {
+  static bool print1 = false;
+  static bool print2 = false;
   star_planner_->tree_age_++;
+
+  ROS_DEBUG("\033[1;35m[OA] determineStrategy pos -> (%f, %f, %f) \n \033[0m",position_.x(), position_.y(), position_.z());
 
   // clear cost image
   cost_image_data_.clear();
@@ -139,8 +143,10 @@ void LocalPlanner::determineStrategy() {
 
   if (!reach_altitude_) {
     starting_height_ = std::max(goal_.z() - 0.5f, take_off_pose_.z() + 1.0f);
-    ROS_INFO("\033[1;35m[OA] Reach height (%f) first: Go fast\n \033[0m",
-             starting_height_);
+    if (!print1) {
+      ROS_INFO("\033[1;35m[OA] Reach height (%f) first: Go fast\n \033[0m",starting_height_);
+      print1 = true;
+    }
     waypoint_type_ = reachHeight;
 
     if (position_.z() > starting_height_) {
@@ -152,6 +158,10 @@ void LocalPlanner::determineStrategy() {
       create2DObstacleRepresentation(true);
     }
   } else {
+    if (!print2) {
+      ROS_INFO("\033[1;35m[OA] Height Reached (%f, %f, %f) \n \033[0m",position_.x(), position_.y(), position_.z());
+      print2 = true;
+    }
     waypoint_type_ = tryPath;
 
     evaluateProgressRate();
