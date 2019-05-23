@@ -183,6 +183,8 @@ void WaypointGenerator::smoothWaypoint(float dt) {
 }
 
 void WaypointGenerator::nextSmoothYaw(float dt) {
+  const float yaw_rate_max_deg = 20.0; // deg/s
+  float yaw_rate_max = yaw_rate_max_deg*DEG_TO_RAD;
   // Use xy smoothing constant for yaw, since this makes more sense than z,
   // and we dont want to introduce yet another parameter
   const float P_constant_xy = smoothing_speed_xy_;
@@ -202,6 +204,9 @@ void WaypointGenerator::nextSmoothYaw(float dt) {
       (desired_yaw_velocity - setpoint_yaw_velocity_) * D_constant_xy;
 
   setpoint_yaw_velocity_ += (p + d) * dt;
+  setpoint_yaw_velocity_ = (setpoint_yaw_velocity_ > yaw_rate_max)? yaw_rate_max : setpoint_yaw_velocity_;
+  setpoint_yaw_velocity_ = (setpoint_yaw_velocity_ < -yaw_rate_max)? -yaw_rate_max : setpoint_yaw_velocity_;
+
   setpoint_yaw_ += setpoint_yaw_velocity_ * dt;
   wrapAngleToPlusMinusPI(setpoint_yaw_);
 }

@@ -414,6 +414,7 @@ void LocalPlannerNode::calculateWaypoints(bool hover) {
   } else {
     mavros_pos_setpoint_pub_.publish(
         toPoseStamped(result.position_wp, result.orientation_wp));
+    ROS_DEBUG("Pub setpoint yaw -> (%f)", getYawFromQuaternion(result.orientation_wp));
     transformPoseToTrajectory(
         obst_free_path,
         toPoseStamped(result.position_wp, result.orientation_wp));
