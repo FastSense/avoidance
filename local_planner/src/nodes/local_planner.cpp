@@ -142,7 +142,8 @@ void LocalPlanner::determineStrategy() {
   }
 
   if (!reach_altitude_) {
-    starting_height_ = std::max(goal_.z() - 0.5f, take_off_pose_.z() + 1.0f);
+//    starting_height_ = std::max(goal_.z() - 0.5f, take_off_pose_.z() + 1.0f);
+    starting_height_ = goal_.z() - 0.3f;
     if (!print1) {
       ROS_INFO("\033[1;35m[OA] Reach height (%f) first: Go fast\n \033[0m",starting_height_);
       print1 = true;
